@@ -13,7 +13,7 @@ contract DonateWeb3PoolTest is Test {
 
     function setUp() public {
         donateWeb3Pool = new DonateWeb3Pool(ownerAddr);
-        for (uint i = 0; i < 3; i++) {
+        for (uint256 i = 0; i < 3; i++) {
             vm.deal(donors[i], 1 ether);
         }
     }
@@ -30,7 +30,7 @@ contract DonateWeb3PoolTest is Test {
         // topic1, topic2, topic3, data
         vm.expectEmit(true, false, false, true);
 
-        uint balance = 1000;
+        uint256 balance = 1000;
         emit DonateLog(donors[0], balance);
 
         // call function
@@ -54,7 +54,7 @@ contract DonateWeb3PoolTest is Test {
     function test_Withdraw() public {
         // donate setup
         vm.prank(donors[0]);
-        uint balance = 1000;
+        uint256 balance = 1000;
         donateWeb3Pool.donate{value: balance}();
 
         // withdraw start
@@ -62,7 +62,7 @@ contract DonateWeb3PoolTest is Test {
         donateWeb3Pool.withdraw();
 
         assertEq(ownerAddr.balance, balance);
-        assertEq(donateWeb3Pool.totalDonation() ,0);
-        assertEq(address(donateWeb3Pool).balance ,0);
+        assertEq(donateWeb3Pool.totalDonation(), 0);
+        assertEq(address(donateWeb3Pool).balance, 0);
     }
 }

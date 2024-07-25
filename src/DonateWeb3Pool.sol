@@ -13,7 +13,7 @@ contract DonateWeb3Pool is Ownable {
     event DonateLog(address indexed donor, uint256 amount);
 
     function withdraw() external onlyOwner {
-        (bool succeed, ) = payable(this.owner()).call{value: totalDonation}("");
+        (bool succeed,) = payable(this.owner()).call{value: totalDonation}("");
         require(succeed, "failed to withdraw");
         totalDonation = 0;
     }
